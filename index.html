@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>For My Pookie ❤️</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Pacifico&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #fff5fb 100%);
+      --accent: #ff477e;
+      --text-main: #590d22;
+      --glass: rgba(255, 255, 255, 0.65);
+      --shadow: 0 10px 40px rgba(255, 71, 126, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg-gradient);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* --- CLICK SPARKLE EFFECT --- */
+    .sparkle {
+      position: absolute; pointer-events: none; animation: spark-float 0.8s ease-out forwards;
+      font-size: 1.5rem; z-index: 9999;
+    }
+    @keyframes spark-float {
+      0% { transform: scale(0.5) translateY(0); opacity: 1; }
+      100% { transform: scale(1.5) translateY(-50px) rotate(45deg); opacity: 0; }
+    }
+
+    /* --- COZY FLOATING BACKGROUND --- */
+    .sticker-layer { position: absolute; top:0; left:0; width:100%; height:100%; z-index: -1; pointer-events: none; overflow: hidden; }
+    .sticker { position: absolute; opacity: 0.15; animation: float 15s ease-in-out infinite; font-size: 2.5rem; filter: grayscale(20%); }
+    
+    .s1 { top: 5%; left: 5%; animation-delay: 0s; font-size: 3rem; }
+    .s2 { top: 15%; right: 10%; animation-delay: 2s; }
+    .s3 { bottom: 20%; left: 10%; animation-delay: 4s; font-size: 3.5rem; }
+    .s4 { bottom: 5%; right: 5%; animation-delay: 1s; }
+    .s5 { top: 40%; left: 80%; animation-delay: 3s; font-size: 2rem; }
+    .s6 { top: 60%; left: 15%; animation-delay: 5s; }
+    .s7 { top: 10%; left: 50%; animation-delay: 7s; opacity: 0.1; }
+    .s8 { bottom: 40%; right: 20%; animation-delay: 2s; font-size: 2.2rem; }
+
+    @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-25px) rotate(10deg);} }
+
+    /* --- GLASS CARD UI --- */
+    .section {
+      display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 20px;
+      animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .section.active { display: flex; }
+    @keyframes zoomIn { from{opacity:0; transform:scale(0.95);} to{opacity:1; transform:scale(1);} }
+
+    .container {
+      width: 100%; max-width: 600px;
+      background: var(--glass);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      padding: 40px 30px; border-radius: 35px;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; align-items: center;
+      position: relative;
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+      font-family: 'Fredoka', sans-serif; font-size: 2.8rem;
+      color: var(--accent); margin-bottom: 15px;
+      text-shadow: 2px 2px 0px white; line-height: 1.2;
+    }
+    p { font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; color: #883a4f; letter-spacing: 0.5px; }
+
+    /* IMAGES */
+    .hero-img {
+      height: 250px; width: auto; object-fit: contain;
+      border-radius: 20px; margin-bottom: 25px;
+      filter: drop-shadow(0 10px 20px rgba(255, 71, 126, 0.2));
+      transition: transform 0.3s;
+      background: rgba(255,255,255,0.5); padding: 5px;
+    }
+    .hero-img:hover { transform: scale(1.05) rotate(2deg); }
+
+    /* BUTTONS */
+    .btn {
+      background: linear-gradient(45deg, #ff477e, #ff8fa3);
+      color: white; border: none; padding: 16px 50px;
+      font-size: 1.3rem; border-radius: 50px; cursor: pointer;
+      font-family: 'Fredoka', sans-serif; box-shadow: 0 8px 20px rgba(255, 71, 126, 0.3);
+      transition: transform 0.1s, box-shadow 0.2s; margin-top: 10px;
+    }
+    .btn:active { transform: scale(0.9); }
+    .btn:disabled { background: #ffccd5; cursor: not-allowed; box-shadow: none; opacity: 0.6; transform: none; }
+
+    /* --- FEATURES --- */
+    .slider-box { width: 100%; margin: 20px 0; }
+    input[type=range] { width: 100%; height: 20px; border-radius: 50px; background: #ffdce5; accent-color: var(--accent); }
+    
+    .choco-row { display: flex; gap: 25px; margin-bottom: 20px; }
+    .choco { font-size: 4.5rem; cursor: pointer; transition: 0.3s; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+    .choco:active { transform: scale(0.8); }
+    .eaten { transform: scale(0); opacity: 0; pointer-events: none; transition: 0.5s; }
+
+    .trap-area { position: relative; width: 100%; height: 150px; margin-top: 20px; display: flex; justify-content: center; }
+    .btn-yes { position: absolute; left: 20px; z-index: 50; }
+    .btn-no { position: absolute; right: 20px; background: #ff5c5c; z-index: 100; transition: 0.15s ease-out; }
+    #trap-msg { height: 25px; font-size: 1.1rem; color: #ff5c5c; font-weight: 800; margin-top: 50px; }
+
+    .love-txt { font-family: 'Pacifico', cursive; font-size: 2.8rem; color: var(--accent); margin-top: 20px; cursor: pointer; text-shadow: 2px 2px 5px rgba(255,255,255,0.8); }
+    .love-txt:active { transform: scale(1.2); }
+
+    .kiss-box { width: 100%; height: 200px; border: 3px dashed var(--accent); border-radius: 25px; background: rgba(255,255,255,0.4); display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; cursor: crosshair; }
+    .lip { position: absolute; font-size: 3.5rem; animation: pop 0.4s forwards; pointer-events: none; }
+    @keyframes pop { 0%{transform:scale(0);} 80%{transform:scale(1.2);} 100%{transform:scale(1);} }
+
+    .music-btn { position: fixed; top: 20px; right: 20px; font-size: 1.8rem; cursor: pointer; background: rgba(255,255,255,0.9); padding: 12px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); z-index: 1000; }
+    .playing { animation: spin 4s linear infinite; color: var(--accent); border: 2px solid var(--accent); }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    .heart-rain { position: fixed; top: -10vh; left: 0; font-size: 2rem; animation: fall 4s linear forwards; pointer-events: none; z-index: 50; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+    /* Promise Modal */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.95); z-index: 999; flex-direction: column; justify-content: center; align-items: center; animation: fadeIn 0.3s; padding: 20px; }
+    .modal-box { background: #fff0f5; padding: 40px; border-radius: 35px; border: 3px solid var(--accent); text-align: center; box-shadow: 0 20px 50px rgba(255, 71, 126, 0.2); max-width: 500px; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; } .hero-img { height: 220px; } 
+      .container { padding: 30px 20px; width: 95%; }
+    }
+  </style>
+</head>
+<body onclick="handleGlobalClick(event)">
+
+  <div class="music-btn" id="music-icon" onclick="toggleMusic(event)">🎵</div>
+  
+  <audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/audio/2024/01/15/audio_22675e0766.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="sticker-layer">
+    <div class="sticker s1">💌</div><div class="sticker s2">🧸</div>
+    <div class="sticker s3">🌹</div><div class="sticker s4">🍫</div>
+    <div class="sticker s5">❤️</div><div class="sticker s6">✨</div>
+    <div class="sticker s7">🐾</div><div class="sticker s8">🎀</div>
+  </div>
+
+  <div class="section active" id="sec-1">
+    <div class="container">
+      <h1>oiiii amr pemmiii...</h1>
+      <p>hehe wanna see? Ok click to "show me" 🙈</p>
+      <button class="btn" onclick="nextStep(2)">Show Me ❤️</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-2">
+    <div class="container">
+      <h1>A Bouquet For You 🌹</h1>
+      <p>Tap the bouquet to smell it!</p>
+      <img src="1000024242.jpg" class="hero-img" onclick="bloom(this)" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1828/1828884.png'">
+      <p id="rose-text" style="opacity:0; transition:1s; color:var(--accent); font-size: 1.5rem;">"Smells sweet... just like you!"</p>
+      <button class="btn" onclick="nextStep(3)">Next >></button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-3">
+    <div class="container">
+      <h1>How much do you Love me? 🥀</h1>
+      <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" id="heart-anim" style="height: 180px;">
+      <div class="slider-box"><input type="range" min="0" max="100" value="0" oninput="checkLove(this.value)"></div>
+      <h2 id="love-percent" style="color:var(--accent); font-size: 2.2rem;">0%</h2>
+      <p id="love-msg" style="height: 25px; font-size: 1.2rem; color: #555;">Eto vab? 😒</p>
+      <button class="btn" id="prop-btn" disabled onclick="nextStep(4)">Yes, Forever 💍</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-4">
+    <div class="container">
+      <h1>Sweetness Overload</h1>
+      <p>Eat all 3 chocolates! 😋</p>
+      <div class="choco-row">
+        <div class="choco" onclick="eat(this)">🍫</div><div class="choco" onclick="eat(this)">🧁</div><div class="choco" onclick="eat(this)">🍩</div>
+      </div>
+      <p id="choco-msg" style="color:var(--accent); font-size: 1.3rem;">0 / 3 Eaten</p>
+      <button class="btn" id="choco-btn" disabled onclick="nextStep(5)">Yummy! Next</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-5">
+    <div class="container">
+      <h1>My Pookie Bear</h1>
+      <p>Tap the bear to tickle him!</p>
+      
+      <img src="1000024432.jpg" class="hero-img" id="teddy-img" onclick="tickleTeddy()" 
+           onerror="this.src='https://media.giphy.com/media/ccW8StTuyRVdu/giphy.gif'">
+      
+      <p id="teddy-msg" style="height: 25px; color:var(--accent); font-size: 1.3rem;">...</p>
+      <button class="btn" onclick="nextStep(6)">Received it 🤗</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-6">
+    <div class="container">
+      <h1>Promise Me?</h1>
+      <p>Hold the button to seal our pact.</p>
+      <img src="https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif" class="hero-img" style="height: 200px;">
+      <p id="green-msg" style="color: #2a9d8f; font-weight: 800; font-size: 1.2rem; opacity: 0; transition: 0.5s;">I promise I'll only love you and only choose you</p>
+      <button class="btn" id="hold-btn" onmousedown="startHold()" onmouseup="endHold()" ontouchstart="startHold()" ontouchend="endHold()">Hold to Promise 🤞</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-7">
+    <div class="container">
+      <h1>Hug Time.. 🙊</h1>
+      <p>Sending you the tightest hug ever!</p>
+      <img src="1000024390.jpg" class="hero-img" onerror="this.src='https://media.giphy.com/media/OqPeCtqPkjejwz43Wp/giphy.gif'">
+      <button class="btn" onclick="nextStep(8)">Hug Back 🤗</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-8">
+    <div class="container">
+      <h1>Kiss time.. 💋🌝</h1>
+      <p>Keep kissing until I'm satisfied!</p>
+      <div class="kiss-box" onclick="addKiss(event)"><span style="opacity:0.4; pointer-events:none; font-size: 1.2rem;">( Tap Tap Tap Here )</span></div>
+      <button class="btn" id="kiss-btn" disabled onclick="nextStep(9)">Muah! 😘</button>
+    </div>
+  </div>
+
+  <div class="section" id="sec-9">
+    <div class="container">
+      <h1>Will You Be Mine Valentine? 🙆🏻</h1>
+      <div class="trap-area">
+        <button class="btn btn-yes" onclick="nextStep(10)">YES ❤️</button>
+        <button class="btn btn-no" id="no-btn" onmouseover="clickNo()" onmousedown="clickNo()" ontouchstart="clickNo()" onclick="clickNo()">NO 💔</button>
+      </div>
+      <div id="trap-msg"></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-10">
+    <div class="container">
+      <h1>My Forever Valentine ❤️</h1>
+      <img src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif" class="hero-img" style="height: 300px;">
+      
+      <p style="font-size: 1.6rem; color: #555; margin-top: 15px; line-height: 1.4;">
+        You're mine little princess... Only Mine 🔪
+      </p>
+      
+      <div class="love-txt" onclick="explodeHearts(event)">I Love You Pemmiii</div>
+      <button class="btn" style="background: #333; margin-top: 30px;" onclick="location.reload()">Replay Love ↺</button>
+    </div>
+  </div>
+
+  <div class="modal" id="promise-modal">
+    <div class="modal-box">
+      <h1 style="font-size: 2.2rem; margin-bottom: 15px;">Promise Sealed 🔒</h1>
+      <p style="font-family:'Nunito'; font-size: 1.2rem; line-height:1.5; color:#333;">"I love you so much and I'll always love you. If ever you feel lonely or unwanted? Just know that you have me and I am always with you my little baby 🌸. I promise"</p>
+      <p style="font-family:'Pacifico'; font-size: 1.6rem; color:var(--accent); margin-top: 25px;">- ur kaw</p>
+      <button class="btn" onclick="closeModal()" style="margin-top: 25px;">I love you too 💜</button>
+    </div>
+  </div>
+
+  <script>
+    let current = 1;
+    let audioStarted = false;
+    const audio = document.getElementById('bg-music');
+    const musicIcon = document.getElementById('music-icon');
+
+    // --- Global Tap Handler ---
+    function handleGlobalClick(e) {
+      // 1. Play Audio on First Interaction
+      if (!audioStarted) {
+        audio.play().then(() => {
+          audioStarted = true;
+          musicIcon.classList.add('playing');
+        }).catch(err => {});
+      }
+      // 2. Create Sparkle Effect
+      createSparkle(e.clientX, e.clientY);
+    }
+
+    function createSparkle(x, y) {
+      const sparkles = ['✨', '❤️', '💖', '🌸'];
+      const el = document.createElement('div');
+      el.className = 'sparkle';
+      el.innerText = sparkles[Math.floor(Math.random() * sparkles.length)];
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 800);
+    }
+
+    function vibrate() {
+      if (navigator.vibrate) navigator.vibrate(50);
+    }
+
+    function nextStep(step) {
+      vibrate();
+      document.getElementById(`sec-${current}`).classList.remove('active');
+      current = step;
+      document.getElementById(`sec-${current}`).classList.add('active');
+      if(step === 10) startHeartRain();
+    }
+
+    function toggleMusic(e) {
+      e.stopPropagation(); // Prevent double trigger
+      vibrate();
+      if(audio.paused) {
+        audio.play();
+        musicIcon.classList.add('playing');
+      } else {
+        audio.pause();
+        musicIcon.classList.remove('playing');
+      }
+    }
+
+    // Logic
+    function bloom(el) {
+      vibrate();
+      el.style.transform = "scale(1.1) rotate(5deg)";
+      document.getElementById('rose-text').style.opacity = 1;
+    }
+
+    function checkLove(val) {
+      document.getElementById('love-percent').innerText = val + "%";
+      const msg = document.getElementById('love-msg');
+      const btn = document.getElementById('prop-btn');
+      const heart = document.getElementById('heart-anim');
+
+      heart.style.transform = `scale(${1 + val/600})`;
+
+      if(val < 100) {
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+      }
+
+      if(val <= 20) msg.innerText = "Eto vab? 😒";
+      else if(val <= 50) msg.innerText = "Kiptami keno? Aro dao! 😤";
+      else if(val <= 80) msg.innerText = "Hae.. jacche! Aro! 🔥";
+      else if(val < 100) msg.innerText = "Ektu baki... Push it! 😡";
+      else {
+        vibrate();
+        msg.innerText = "YAY! Perfect! ❤️";
+        btn.disabled = false;
+        btn.style.opacity = "1";
+      }
+    }
+
+    let eaten = 0;
+    function eat(el) {
+      vibrate();
+      el.style.transform = "scale(0) rotate(180deg)";
+      el.style.opacity = '0';
+      eaten++;
+      document.getElementById('choco-msg').innerText = `${eaten} / 3 Eaten`;
+      if(eaten === 3) document.getElementById('choco-btn').disabled = false;
+    }
+
+    function tickleTeddy() {
+      vibrate();
+      const img = document.getElementById('teddy-img');
+      img.style.transform = "scale(1.1) rotate(10deg)";
+      document.getElementById('teddy-msg').innerText = "Hehe! It tickles! 😆";
+      setTimeout(() => img.style.transform = "scale(1)", 500);
+    }
+
+    let holdTimer;
+    const holdBtn = document.getElementById('hold-btn');
+    const greenMsg = document.getElementById('green-msg');
+    
+    function startHold() {
+      vibrate();
+      holdBtn.innerText = "Holding... ❤️";
+      holdTimer = setTimeout(() => {
+        holdBtn.style.display = 'none';
+        greenMsg.style.opacity = 1;
+        setTimeout(() => {
+          document.getElementById('promise-modal').style.display = 'flex';
+        }, 1500);
+      }, 1500);
+    }
+    function endHold() {
+      clearTimeout(holdTimer);
+      if(greenMsg.style.opacity == 0) holdBtn.innerText = "Hold to Promise 🤞";
+    }
+    function closeModal() {
+      vibrate();
+      document.getElementById('promise-modal').style.display = 'none';
+      nextStep(7);
+    }
+
+    let kisses = 0;
+    function addKiss(e) {
+      vibrate();
+      const rect = e.target.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const el = document.createElement('div');
+      el.innerText = '💋';
+      el.className = 'lip';
+      el.style.left = x + 'px'; el.style.top = y + 'px';
+      el.style.setProperty('--r', (Math.random()*40-20)+'deg');
+      e.target.appendChild(el);
+      kisses++;
+      if(kisses >= 10) {
+        document.getElementById('kiss-btn').disabled = false;
+        document.getElementById('kiss-btn').innerText = "Muah! Enough! 😘";
+      }
+    }
+
+    const noBtn = document.getElementById('no-btn');
+    const trapMsg = document.getElementById('trap-msg');
+    const trapTexts = ["Are you sure? 🤨", "Yes tip!!!", "Think again! ⚠️", "Just click YES! 😤", "Wrong answer! 🔪", "aw mine little baby rag kore acho? 👉🏻👈🏻", "Yes chap!!", "Soch lo! 😒", "huh, really? 🔪"];
+    
+    function clickNo() {
+      vibrate();
+      const x = Math.random() * (window.innerWidth - 200);
+      const y = Math.random() * (window.innerHeight - 200);
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = Math.max(0, x) + 'px';
+      noBtn.style.top = Math.max(0, y) + 'px';
+      trapMsg.innerText = trapTexts[Math.floor(Math.random()*trapTexts.length)];
+    }
+
+    function startHeartRain() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.innerText = '❤️';
+        heart.className = 'heart-rain';
+        heart.style.left = Math.random() * 100 + 'vw';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }, 200);
+    }
+
+    function explodeHearts(e) {
+      vibrate();
+      e.target.style.transform = "scale(1.2)";
+      e.target.innerText = "I LOVE YOU PEMMIII ❤️❤️❤️";
+      setTimeout(()=>e.target.style.transform = "scale(1)", 200);
+    }
+  </script>
+</body>
+</html>
